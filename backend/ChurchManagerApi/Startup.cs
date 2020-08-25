@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace ChurchManagerApi
 {
@@ -29,6 +30,25 @@ namespace ChurchManagerApi
             services.AddSwaggerGen();
 
             services.AddControllers();
+
+            services.AddCors(options =>
+                options.AddPolicy("CorsPolicy", builder =>
+                builder.AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .WithOrigins("http://localhost:3000", "https://churchmanager.jmliebe.com")
+                    .AllowCredentials()));
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme =
+                    JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme =
+                    JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.Authority = Configuration["Auth0:Authority"];
+                options.Audience = Configuration["Auth0:Audience"];
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,23 +59,18 @@ namespace ChurchManagerApi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+            }
 
-                app.UseSwaggerUI(c =>
-                {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Church Manager API");
-                });
-            }
-            else
+            app.UseSwaggerUI(c =>
             {
-                app.UseSwaggerUI(c =>
-                {
-                    c.SwaggerEndpoint("/blog/swagger/v1/swagger.json", "Church Manager API");
-                });
-            }
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Church Manager API");
+            });
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
