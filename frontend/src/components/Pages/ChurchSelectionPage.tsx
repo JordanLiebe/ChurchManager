@@ -5,9 +5,10 @@ import { RouteComponentProps } from 'react-router-dom';
 import { css, jsx } from '@emotion/core';
 
 const ChurchSelectionPage: FC<RouteComponentProps> = ({ history }) => {
-  const [managedChurches, setManagedChurches] = useState<string[]>([
-    'Bethlehem Lutheran Church',
-    'Christ Alone Lutheran Church',
+  const [managedChurches, setManagedChurches] = useState([
+    { id: 1, name: 'Bethlehem Lutheran Church', acronym: 'BLC' },
+    { id: 2, name: 'Christ Alone Lutheran Church', acronym: 'CALC' },
+    { id: 3, name: 'Grace and Mercy Lutheran Church', acronym: 'GMLC' },
   ]);
   const [selectedChurchField, setSelectedChurchField] = useState<string>('');
 
@@ -43,7 +44,9 @@ const ChurchSelectionPage: FC<RouteComponentProps> = ({ history }) => {
             </option>
             {managedChurches &&
               managedChurches.map((church) => (
-                <option key={church}>{church}</option>
+                <option key={church.id} value={church.acronym}>
+                  {church.name}
+                </option>
               ))}
           </Form.Control>
         </Modal.Body>

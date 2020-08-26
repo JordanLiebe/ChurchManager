@@ -17,8 +17,8 @@ function App() {
         <Header />
         <Switch>
           <Route exact path="/" component={ChurchSelectionPage} />
-          <Redirect exact path="/:church/Dashboard" to="/:church" />
-          <Route path="/:church" component={DashboardPage} />
+          <Redirect exact path="/:church" to="/:church/Dashboard" />
+          <Route path="/:church/Dashboard" component={DashboardPage} />
         </Switch>
       </BrowserRouter>
     </div>
