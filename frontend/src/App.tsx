@@ -10,7 +10,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { css, jsx } from '@emotion/core';
 
 function App() {
-  const [church, setChurch] = useState<string>('');
   return (
     <div className="App">
       <BrowserRouter>

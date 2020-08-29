@@ -6,9 +6,30 @@ import { css, jsx } from '@emotion/core';
 
 const ChurchSelectionPage: FC<RouteComponentProps> = ({ history }) => {
   const [managedChurches, setManagedChurches] = useState([
-    { id: 1, name: 'Bethlehem Lutheran Church', acronym: 'BLC' },
-    { id: 2, name: 'Christ Alone Lutheran Church', acronym: 'CALC' },
-    { id: 3, name: 'Grace and Mercy Lutheran Church', acronym: 'GMLC' },
+    {
+      id: 0,
+      acronym: '',
+      short: '',
+      name: 'No Choice',
+    },
+    {
+      id: 1,
+      acronym: 'BLC',
+      short: 'BLC-01',
+      name: 'Bethlehem Lutheran Church',
+    },
+    {
+      id: 2,
+      acronym: 'CALC',
+      short: 'CALC-01',
+      name: 'Christ Alone Lutheran Church',
+    },
+    {
+      id: 3,
+      acronym: 'GMLC',
+      short: 'GMLC-02',
+      name: 'Grace and Mercy Lutheran Church',
+    },
   ]);
   const [selectedChurchField, setSelectedChurchField] = useState<string>('');
 
@@ -44,7 +65,7 @@ const ChurchSelectionPage: FC<RouteComponentProps> = ({ history }) => {
             </option>
             {managedChurches &&
               managedChurches.map((church) => (
-                <option key={church.id} value={church.acronym}>
+                <option key={church.short} value={church.short}>
                   {church.name}
                 </option>
               ))}

@@ -10,7 +10,6 @@ const PageTitle: FC<TitleProps> = ({ title }) => {
   return (
     <div
       css={css`
-        width: 100%;
         text-align: center;
         font-size: 22px;
         padding: 10px;

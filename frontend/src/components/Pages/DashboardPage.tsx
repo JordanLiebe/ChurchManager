@@ -1,8 +1,11 @@
-import React, { FC, useState } from 'react';
-import { Modal, Button, Form } from 'react-bootstrap';
+import React, { FC, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import Navigation, { Link } from '../Base/Navigation';
 import PageTitle from '../Base/PageTitle';
+import Dashboard from '../Partial/Dashboard';
+
+import { useParams } from 'react-router-dom';
+
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
 
@@ -30,6 +33,10 @@ const Links: Link[] = [
 ];
 
 const DashboardPage: FC<RouteComponentProps> = ({ history }) => {
+  let { church } = useParams();
+
+  useEffect(() => {});
+
   return (
     <div
       css={css`
@@ -38,6 +45,8 @@ const DashboardPage: FC<RouteComponentProps> = ({ history }) => {
     >
       <Navigation links={Links} />
       <PageTitle title="Dashboard" />
+      <Dashboard />
+      {church}
     </div>
   );
 };
