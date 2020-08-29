@@ -14,7 +14,9 @@
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "VaultUri": "https://churchmanagerapivault.vault.azure.net/",
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "AZURE_USERNAME": "Jordan.Liebe@jmliebe.com"
       }
     },
     "ChurchManagerApi": {
@@ -22,7 +24,9 @@
       "launchBrowser": true,
       "launchUrl": "weatherforecast",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "VaultUri": "https://churchmanagerapivault.vault.azure.net/",
+        "AZURE_USERNAME": "Jordan.Liebe@jmliebe.com"
       },
       "applicationUrl": "https://localhost:5001;http://localhost:5000"
     }

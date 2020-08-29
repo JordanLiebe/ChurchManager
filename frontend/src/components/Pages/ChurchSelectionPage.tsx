@@ -1,38 +1,23 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import { RouteComponentProps } from 'react-router-dom';
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
 
-const ChurchSelectionPage: FC<RouteComponentProps> = ({ history }) => {
-  const [managedChurches, setManagedChurches] = useState([
-    {
-      id: 0,
-      acronym: '',
-      short: '',
-      name: 'No Choice',
-    },
-    {
-      id: 1,
-      acronym: 'BLC',
-      short: 'BLC-01',
-      name: 'Bethlehem Lutheran Church',
-    },
-    {
-      id: 2,
-      acronym: 'CALC',
-      short: 'CALC-01',
-      name: 'Christ Alone Lutheran Church',
-    },
-    {
-      id: 3,
-      acronym: 'GMLC',
-      short: 'GMLC-02',
-      name: 'Grace and Mercy Lutheran Church',
-    },
-  ]);
-  const [selectedChurchField, setSelectedChurchField] = useState<string>('');
+interface Church {
+  Id: number;
+  Short: string;
+  Acronym: string;
+  Name: string;
+}
 
+const ChurchSelectionPage: FC<RouteComponentProps> = ({ history }) => {
+  const [selectedChurchField, setSelectedChurchField] = useState<string>('');
+  const [churches, setChurches] = useState<Church>({});
+  useEffect(() => {
+    const doGetChurches = () => {};
+    doGetChurches();
+  });
   return (
     <div
       css={css`
