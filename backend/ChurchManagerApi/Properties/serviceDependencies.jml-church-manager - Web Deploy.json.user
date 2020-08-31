@@ -1,0 +1,30 @@
+{
+  "dependencies": {
+    "secrets1": {
+      "restored": true,
+      "restoreTime": "2020-08-29T18:56:36.6822816Z"
+    },
+    "mssql1": {
+      "restored": true,
+      "restoreTime": "2020-08-29T18:59:00.6807631Z"
+    }
+  },
+  "parameters": {
+    "secrets1.resourceGroupName": {
+      "Type": "resourceGroup",
+      "Value": "Jmliebe"
+    },
+    "mssql1.subscriptionId": {
+      "Type": "subscription",
+      "Value": "b002654d-fe56-4f13-8996-a2e4a4e688e2"
+    },
+    "mssql1.resourceGroupName": {
+      "Type": "resourceGroup",
+      "Value": "Jmliebe"
+    },
+    "secrets1.subscriptionId": {
+      "Type": "subscription",
+      "Value": "b002654d-fe56-4f13-8996-a2e4a4e688e2"
+    }
+  }
+}

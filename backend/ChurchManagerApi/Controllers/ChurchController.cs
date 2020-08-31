@@ -21,7 +21,6 @@ namespace ChurchManagerApi.Controllers
             _dataRepository = dataRepository;
         }
 
-        [Route("Typeahead")]
         [HttpGet, AllowAnonymous]
         public IActionResult Get()
         {

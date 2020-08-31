@@ -59,6 +59,8 @@ namespace ChurchManagerApi
         {
             app.UseSwagger();
 
+            app.UseCors("CorsPolicy");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

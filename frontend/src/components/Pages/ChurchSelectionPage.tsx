@@ -1,23 +1,33 @@
 import React, { FC, useState, useEffect } from 'react';
-import { Modal, Button, Form } from 'react-bootstrap';
+import { Modal, Button, Form, Alert } from 'react-bootstrap';
 import { RouteComponentProps } from 'react-router-dom';
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
 
 interface Church {
-  Id: number;
-  Short: string;
-  Acronym: string;
-  Name: string;
+  id: number;
+  acronym: string;
+  name: string;
 }
 
 const ChurchSelectionPage: FC<RouteComponentProps> = ({ history }) => {
   const [selectedChurchField, setSelectedChurchField] = useState<string>('');
-  const [churches, setChurches] = useState<Church>({});
+  const [churches, setChurches] = useState<Church[]>([]);
+  const [formErrors, setFormErrors] = useState<string[]>([]);
   useEffect(() => {
-    const doGetChurches = () => {};
+    const doGetChurches = async () => {
+      const endpoint = process.env.REACT_APP_API + 'Church/Typeahead';
+
+      let response = await fetch(endpoint);
+
+      if (response && response.status === 200) {
+        let data: Church[] = await response.json();
+        setChurches(data);
+      }
+    };
     doGetChurches();
-  });
+  }, churches);
+  console.log(formErrors);
   return (
     <div
       css={css`
@@ -39,36 +49,46 @@ const ChurchSelectionPage: FC<RouteComponentProps> = ({ history }) => {
         </Modal.Header>
 
         <Modal.Body>
-          <Form.Control
-            as="select"
-            onChange={(event) =>
-              setSelectedChurchField(event.currentTarget.value)
-            }
-          >
-            <option key="" value="">
-              Nothing Selected
-            </option>
-            {managedChurches &&
-              managedChurches.map((church) => (
-                <option key={church.short} value={church.short}>
+          {churches && (
+            <Form.Control
+              as="select"
+              onChange={(event) =>
+                setSelectedChurchField(event.currentTarget.value)
+              }
+              disabled={formErrors.length > 0}
+            >
+              <option></option>
+              {churches.map((church) => (
+                <option key={'church_' + church.acronym} value={church.acronym}>
                   {church.name}
                 </option>
               ))}
-          </Form.Control>
+            </Form.Control>
+          )}
         </Modal.Body>
-
         <Modal.Footer>
-          <Button
-            variant="primary"
-            css={css`
-              margin: auto;
-            `}
-            onClick={() => {
-              history.push(selectedChurchField);
-            }}
-          >
-            Select
-          </Button>
+          {formErrors.length > 0 ? (
+            formErrors.map((error) => <Alert variant="danger">{error}</Alert>)
+          ) : (
+            <Button
+              variant="primary"
+              css={css`
+                margin: auto;
+              `}
+              onClick={() => {
+                if (selectedChurchField !== '')
+                  history.push(selectedChurchField);
+                else {
+                  let tempList = formErrors;
+                  tempList.push('Select a Church');
+                  setFormErrors(tempList);
+                }
+              }}
+              disabled={formErrors.length > 0}
+            >
+              Select
+            </Button>
+          )}
         </Modal.Footer>
       </Modal.Dialog>
     </div>

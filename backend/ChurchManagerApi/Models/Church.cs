@@ -8,7 +8,6 @@ namespace ChurchManagerApi.Models
     public class Church
     {
         public int Id { get; set; }
-        public string Short { get; set; }
         public string Acronym { get; set; }
         public string Name { get; set; }
     }

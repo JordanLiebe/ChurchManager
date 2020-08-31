@@ -2,7 +2,6 @@ import React, { FC, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import Navigation, { Link } from '../Base/Navigation';
 import PageTitle from '../Base/PageTitle';
-import Dashboard from '../Partial/Dashboard';
 
 import { useParams } from 'react-router-dom';
 
@@ -32,7 +31,7 @@ const Links: Link[] = [
   },
 ];
 
-const DashboardPage: FC<RouteComponentProps> = ({ history }) => {
+const AttendancePage: FC<RouteComponentProps> = ({ history }) => {
   let { church } = useParams();
 
   useEffect(() => {}, [church]);
@@ -44,11 +43,10 @@ const DashboardPage: FC<RouteComponentProps> = ({ history }) => {
       `}
     >
       <Navigation links={Links} />
-      <PageTitle title="Dashboard" />
-      <Dashboard />
+      <PageTitle title="Attendance" />
       {church}
     </div>
   );
 };
 
-export default DashboardPage;
+export default AttendancePage;
