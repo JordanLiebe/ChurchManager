@@ -32,5 +32,20 @@ namespace ChurchManagerApi.Data
                     .ToList();
             }
         }
+
+        public IEnumerable<Member> GetAllMembers(string ChurchAcronym)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+
+                var questionDictionary =
+                    new Dictionary<int, Member>();
+                return connection
+                    .Query<Member>(@"EXEC [church-manager].[dbo].[SP_Get_All_Members] @Church = @Church", new { Church = ChurchAcronym })
+                    .Distinct()
+                    .ToList();
+            }
+        }
     }
 }

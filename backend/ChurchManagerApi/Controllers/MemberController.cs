@@ -12,26 +12,19 @@ namespace ChurchManagerApi.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class MemberController : ControllerBase
+    public class ChurchController : ControllerBase
     {
         private readonly IDataRepository _dataRepository;
 
-        public MemberController(IDataRepository dataRepository)
+        public ChurchController(IDataRepository dataRepository)
         {
             _dataRepository = dataRepository;
         }
 
         [HttpGet, AllowAnonymous]
-        public IActionResult Get(string ChurchAcronym)
+        public IActionResult Get()
         {
-            if (ChurchAcronym == null)
-                return NotFound();
-
-            var data = _dataRepository.GetAllMembers(ChurchAcronym);
-
-            if (data.Count() == 0)
-                return NotFound();
-
+            var data = _dataRepository.GetAllChurches();
             return Ok(data);
         }
     }

@@ -16,7 +16,7 @@ const ChurchSelectionPage: FC<RouteComponentProps> = ({ history }) => {
   const [formErrors, setFormErrors] = useState<string[]>([]);
   useEffect(() => {
     const doGetChurches = async () => {
-      const endpoint = process.env.REACT_APP_API + 'Church/Typeahead';
+      const endpoint = process.env.REACT_APP_API + 'Church';
 
       let response = await fetch(endpoint);
 
@@ -27,7 +27,6 @@ const ChurchSelectionPage: FC<RouteComponentProps> = ({ history }) => {
     };
     doGetChurches();
   }, churches);
-  console.log(formErrors);
   return (
     <div
       css={css`
@@ -57,7 +56,7 @@ const ChurchSelectionPage: FC<RouteComponentProps> = ({ history }) => {
               }
               disabled={formErrors.length > 0}
             >
-              <option></option>
+              <option value="">----</option>
               {churches.map((church) => (
                 <option key={'church_' + church.acronym} value={church.acronym}>
                   {church.name}

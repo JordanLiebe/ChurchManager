@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using ChurchManagerApi.Data;
+using System.Security.Cryptography.Xml;
 
 namespace ChurchManagerApi
 {
